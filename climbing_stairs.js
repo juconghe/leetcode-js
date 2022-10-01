@@ -5,12 +5,12 @@
  var climbStairs = function(n) {
     if (n === 1) return 1;
     if (n === 2) return 2;
-    const list = [0, 1, 2];
+    let prev1 = 1;
+    let prev2 = 2;
     for(let i = 3; i <= n; i++) {
-        list.push(list[i-1] + list[i-2]);
+        const temp = prev2;
+        prev2 = prev1 + prev2;
+        prev1 = temp;
     }
-    console.log(list);
-    return list[n];
+    return prev2;
 };
-
-console.log(climbStairs(10));

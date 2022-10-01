@@ -5,10 +5,12 @@
  var fib = function(n) {
     if (n === 0) return 0;
     if (n === 1) return 1;
-    const list = [0, 1];
+    let prev1 = 0;
+    let prev2 = 1;
     for (let i = 2; i <= n; i++) {
-        list.push(list[i-1]+list[i-2]);
+        const temp = prev2;
+        prev2 = prev1 + prev2;
+        prev1 = temp;
     }
-    console.log(list);
-    return list[n];
+    return prev2;
 };
