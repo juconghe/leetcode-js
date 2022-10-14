@@ -7,6 +7,8 @@
     if (s.length !== t.length) return false;
     const [encodingS, uniqueLetterS] = createEncoding(s);
     const [encodingT, uniqueLetterT] = createEncoding(t);
+    console.log(encodingS, encodingT);
+    console.log(uniqueLetterS, uniqueLetterT);
     return encodingS === encodingT && uniqueLetterS === uniqueLetterT;
 };
 
@@ -15,15 +17,17 @@
  * @return {string}
  */
 const createEncoding = s => {
-    const lookUp = {};
+    const lookUp = new Map();
     let encoding = '';
+    let count = 0;
     s.split('').forEach((c, index) => {
-        if (!lookUp[c]) {
-            lookUp[c] = index;
+        if (!lookUp.has(c)) {
+            count += 1;
+            lookUp.set(c, index);
         }
-        encoding = `${encoding}${lookUp[c]}`;
+        encoding = `${encoding}${lookUp.get(c)}`;
     })
-    return [encoding, Object.keys(lookUp).length];
+    return [encoding, lookUp.size];
 }
 
-console.log(isIsomorphic("ab", "aa"));
+console.log(isIsomorphic("abcdefghijklmnopqrstuvwxyzva", "abcdefghijklmnopqrstuvwxyzck"));
