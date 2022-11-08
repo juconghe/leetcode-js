@@ -7,31 +7,11 @@
     const columnConstraints = Object.create(null);
     const localConstraints = Object.create(null);
 
-    const getLocalKey = (i, j) => {
-        let key = '';
-        if (i < 3) {
-            key = '1';
-        } else if (i < 6) {
-            key = '4'
-        } else {
-            key = '7'
-        }
-
-        if (j < 3) {
-            key =`${key},1`;
-        } else if (j < 6) {
-            key = `${key},4`
-        } else {
-            key = `${key},7`
-        }
-        return key;
-    }
-
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             const value = board[i][j];
             if (value === '.') continue;
-            const local = getLocalKey(i, j);
+            const local = `${Math.floor(i / 3)}${Math.floor(j / 3)}`;
             if (rowConstraints[i]) {
                 if (rowConstraints[i].has(value)) return false;
                 rowConstraints[i].add(value);
