@@ -16,4 +16,23 @@ var subsets = function(nums) {
     return result;
 };
 
-subsets([1, 2, 3]);
+
+var subset_backtracking = function(nums) {
+    const result = [];
+
+    const backtracking = (index, subset) => {
+        result.push([...subset]);
+
+        for(let i = index; i < nums.length; i++) {
+            subset.push(nums[i]);
+            backtracking(i+1, subset);
+            subset.pop();
+        }
+    }
+
+    backtracking(0, []);
+    return result;
+
+}
+
+subset_backtracking([1, 2, 3]);

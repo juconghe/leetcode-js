@@ -18,6 +18,6 @@ var subsetsWithDup = function (nums) {
     return result;
 };
 
-const nums = [1, 2, 2];
+const nums = [10,1,2,7,6,1,5];
 
 subsetsWithDup(nums);

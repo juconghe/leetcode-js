@@ -20,7 +20,24 @@ var combinationSum = function(candidates, target) {
     return result;
 };
 
-const candidates = [2,3,5];
-const target = 8;
+var combinationSum_backtracking = function(candidates, target) {
+    const result = [];
+    const backtracking = (index, subset, sum) => {
+        if (sum > target) return;
+        if (sum === target) {
+            result.push([...subset]);
+        }
+        for (let i = index; i < candidates.length; i++) {
+            subset.push(candidates[i]);
+            backtracking(i, subset, candidates[i] + sum);
+            subset.pop();
+        }
+    }
+    backtracking(0, [], 0);
+    return result;
+};
 
-combinationSum(candidates, target);
+const candidates = [2,3,6,7];
+const target = 7;
+
+combinationSum_backtracking(candidates, target);
