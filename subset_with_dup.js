@@ -18,6 +18,29 @@ var subsetsWithDup = function (nums) {
     return result;
 };
 
-const nums = [10,1,2,7,6,1,5];
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup_backtracking = function (nums) {
+    const result = [];
+    const backtracking = (index, subset) => {
+        result.push([...subset]);
 
+        for(let i = index; i < nums.length; i++) {
+            if (i !== index && nums[i] === nums[i - 1]) {
+                continue;
+            }
+            subset.push(nums[i]);
+            backtracking(i + 1, subset);
+            subset.pop();
+        }
+    }
+    nums.sort((a, b) => a - b);
+    backtracking(0, []);
+    return result;
+};
+
+const nums = [10,1,2,7,6,1,5];
 subsetsWithDup(nums);
+subsetsWithDup_backtracking(nums);
