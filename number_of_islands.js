@@ -54,6 +54,31 @@ var findAllOnes = function(grid) {
     return result;
 };
 
+var numIslands_backtracking = function(grid) {
+    const frontier = new Set([]);
+    const offsets = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+    let count = 0;
+    const dfs = (row, column) => {
+        if (row < 0 || row === grid.length) return;
+        if (column < 0 || column === grid[0].length) return;
+        if (grid[row][column] === '0') return;
+        grid[row][column] = '0';
+        for (let i = 0; i < offsets.length; i++) {
+            dfs(row + offsets[i][0], column + offsets[i][1]);
+        }
+    }
+
+    for(let i = 0; i < grid.length; i++) {
+        for(let j = 0; j < grid[0].length; j++) {
+            if (grid[i][j] === '1') {
+                count += 1;
+                dfs(i, j);
+            }
+        }
+    }
+
+    return count;
+}
 const test = [
     ["1","1","0","0","0"],
     ["1","1","0","0","0"],
@@ -61,4 +86,4 @@ const test = [
     ["0","0","0","1","1"]
 ];
 
-numIslands(test);
+numIslands_backtracking(test);
