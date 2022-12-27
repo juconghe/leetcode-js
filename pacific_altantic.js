@@ -1,4 +1,7 @@
 /**
+ * Variance of the number of islands
+ * instead of starting from 1s we start at pacific and atlantic side.
+ * Given we are starting from borders with dfs, we could ignore the decreasing visit case from the center 
  * @param {number[][]} heights
  * @return {number[][]}
  */
@@ -25,6 +28,7 @@ var pacificAtlantic = function (heights) {
     }
 
     for (let i = 0; i < heights[0].length; i++) {
+        // previous height is -1 for initial search
         dfs(0, i, -1, pacific);
         dfs(heights.length - 1, i, -1, atlantic);
     }
