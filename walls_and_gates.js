@@ -5,31 +5,32 @@
 var wallsAndGates = function (rooms) {
     const ROW = rooms.length;
     const COLUMN = rooms[0].length;
-    const INF = 2147483647;
     const offsets = [
         [-1, 0],
         [0, 1],
         [1, 0],
         [0, -1]
     ];
-
-    const dfs = (row, column, prevDistance) => {
-        if (row < 0 || row === ROW) return;
-        if (column < 0 || column === COLUMN) return;
-        if (rooms[row][column] === -1) return;
-        if (rooms[row][column] <= prevDistance) return;
-        if (rooms[row][column] === 0 && prevDistance !== -1) return;
-        rooms[row][column] = prevDistance + 1;
-        for (let i = 0; i < offsets.length; i++) {
-            dfs(row + offsets[i][0], column + offsets[i][1], rooms[row][column]);
-        }
-    }
-
+    const queue = [];
     for (let r = 0; r < ROW; r++) {
         for (c = 0; c < COLUMN; c++) {
             if (rooms[r][c] === 0) {
-                dfs(r, c, -1);
+                queue.push([r, c]);
             }
+        }
+    }
+
+    while (queue.length) {
+        const [row, column] = queue.shift();
+        for (let i = 0; i < offsets.length; i++) {
+            const newRow = row + offsets[i][0];
+            const newColumn = column + offsets[i][1];
+            if (newRow < 0 || newRow === ROW) continue;
+            if (newColumn < 0 || newColumn === COLUMN) continue;
+            if (rooms[newRow][newColumn] === -1) continue;
+            if (rooms[newRow][newColumn] <= rooms[row][column] + 1) continue;
+            rooms[newRow][newColumn] = rooms[row][column] + 1;
+            queue.push([newRow, newColumn]);
         }
     }
 
@@ -58,6 +59,7 @@ const rooms = [
     [2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 0, 2147483647],
     [2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 2147483647, 0]
 ]
+
 
 
 wallsAndGates(rooms);
