@@ -1,3 +1,4 @@
+const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 function ListNode(val) {
     this.val = val;
     this.children = [];
@@ -15,7 +16,6 @@ var minCostConnectPoints = function (points) {
     let cost = 0;
     // no heap in js, use sort to fake min heap.
     const queue = new MinPriorityQueue();
-
     for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
             const distance = Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]);
@@ -24,7 +24,7 @@ var minCostConnectPoints = function (points) {
         }
     }
 
-    queue.enqueue([nodes[0], 0], 0);
+    queue.enqueue([nodes[0], 0], 1);
     while(frontier.size !== points.length) {
         const [node, weight] = queue.dequeue().element;
         if (frontier.has(node.val)) continue;

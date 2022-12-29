@@ -1,0 +1,27 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "leetcode-js",
+  "main": "null",
+  "dependencies": {
+    "@datastructures-js/priority-queue": "4.1.0",
+    "@datastructures-js/queue": "4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juconghe/leetcode-js.git"
+  },
+  "keywords": [
+    "Hjc1995ma@"
+  ],
+  "author": "juconghe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juconghe/leetcode-js/issues"
+  },
+  "homepage": "https://github.com/juconghe/leetcode-js#readme"
+}
